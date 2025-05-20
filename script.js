@@ -1,0 +1,58 @@
+const video = document.querySelector('.bg-video');
+const video_btn = document.querySelector('.button__start');
+const video_dark = document.querySelector('.dark__start');
+const first_lvl = document.querySelector('.first__lvl');
+const first_boss = document.querySelector('.first__boss');
+const first_smith = document.querySelector('.first__smith');
+const first_music = document.querySelector('.first__music');
+const smith = document.querySelector('.smith');
+const back = document.querySelector('.back');
+const hrust = document.querySelector('.hrust');
+const point = document.querySelector('.points');
+const buy1 = document.getElementById('buy1');
+const buy2 = document.getElementById('buy2');
+const buy3 = document.getElementById('buy3');
+const slaw = document.querySelector('.slaw');
+
+function playVideo() {
+    video_dark.classList.add('active');
+    video.play()
+}
+
+video_btn.addEventListener('click', playVideo);
+
+video.addEventListener('ended', function() {
+    video.classList.add('ended');
+    first_lvl.classList.add('active');
+    first_music.play();
+});
+
+let damage = 1
+let points = 0
+
+first_lvl.addEventListener('click', function() {
+    points += damage;
+    point.innerHTML = points;
+    hrust.play();
+    slaw.classList.add('active');
+    first_boss.classList.add('active');
+    setTimeout(() => first_boss.classList.remove('active'), 100);
+    setTimeout(() => slaw.classList.remove('active'), 400);
+});
+
+back.addEventListener('click', function() {
+    smith.classList.remove('active');
+});
+
+first_smith.addEventListener('click', function() {
+    smith.classList.add('active');
+});
+
+buy1.addEventListener('click', function() {
+    if (points >= 10) {
+        damage = 2;
+        points -=  10;
+        return;
+    };
+    alert('Не хватка бабла')
+});

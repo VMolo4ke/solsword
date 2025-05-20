@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sword</title>
+</head>
+<body>
+    <div class="dark__start">
+        <div class="button__start">Begin</div>
+    </div>
+    <video class="bg-video">
+        <source src="source/start.mp4" type="video/mp4">
+    </video>
+    <div class="first__lvl">
+        <audio loop src="source/first_music.mp3" class="first__music"></audio>
+        <audio src="source/hrust.mp3" class="hrust"></audio>
+        <div class="first__smith"><img src="source/blacksmith.png" alt=""></div>
+        <div class="smith">
+            <div class="back">Back to Village</div>
+            <div class="smith__title">Blacksmith Shop</div>
+            <div class="sword">
+                <div class="image"><img src="source/blade.png" alt=""></div>
+                <div class="desc">
+                    <div class="title">Blade</div>
+                    <div class="text">Damage 2</div>
+                    <div class="buy" id="buy1">Buy for 10</div>
+                </div>
+            </div>
+            <div class="sword">
+                <div class="image"><img src="source/katana.png" alt=""></div>
+                <div class="desc">
+                    <div class="title">Katana</div>
+                    <div class="text">Damage 5</div>
+                    <div class="buy" id="buy2">Buy for 8000</div>
+                </div>
+            </div>
+            <div class="sword">
+                <div class="image"><img src="source/blackblade.png" alt=""></div>
+                <div class="desc">
+                    <div class="title">Black Blade</div>
+                    <div class="text">Damage 15</div>
+                    <div class="buy" id="buy3">Buy for 122000</div>
+                </div>
+            </div>
+        </div>
+        <div class="points"></div>
+        <div class="first__boss">
+            <div class="slaw">
+                <embed src="source/claw_blade.gif" alt="">
+            </div>
+            <img src="source/skelet.png" alt="Skull">
+        </div>
+        <img src="source/bg_first.png"></img>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
