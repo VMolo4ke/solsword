@@ -27,19 +27,6 @@ video.addEventListener('ended', function() {
     first_music.play();
 });
 
-let damage = 1
-let points = 0
-
-first_lvl.addEventListener('click', function() {
-    points += damage;
-    point.innerHTML = points;
-    hrust.play();
-    slaw.classList.add('active');
-    first_boss.classList.add('active');
-    setTimeout(() => first_boss.classList.remove('active'), 100);
-    setTimeout(() => slaw.classList.remove('active'), 400);
-});
-
 back.addEventListener('click', function() {
     smith.classList.remove('active');
 });
@@ -48,11 +35,67 @@ first_smith.addEventListener('click', function() {
     smith.classList.add('active');
 });
 
+const userData = {
+    damage: 1,
+    points: 0
+};
+
+// Функции для работы с хранилищем Telegram
+async function initUserData() {
+    try {
+        // Пытаемся получить данные из Cloud Storage
+        const storedData = await Telegram.WebApp.CloudStorage.getItem('userData');
+        if (storedData) {
+        Object.assign(userData, JSON.parse(storedData));
+        }
+    } catch (e) {
+        // Если Cloud Storage недоступен, используем localStorage
+        const localData = localStorage.getItem('userData');
+        if (localData) {
+        Object.assign(userData, JSON.parse(localData));
+        }
+    }
+    updateUI();
+}
+
+async function saveUserData() {
+    const data = JSON.stringify(userData);
+    try {
+        await Telegram.WebApp.CloudStorage.setItem('userData', data);
+    } catch (e) {
+        localStorage.setItem('userData', data);
+    }
+    updateUI();
+}
+
+function updateUI() {
+    
+  // Другие обновления интерфейса...
+}
+
+// Инициализация данных при загрузке
+initUserData();
+
+// Модифицируем обработчик клика
+first_lvl.addEventListener('click', function() {
+    userData.points += userData.damage;
+    point.innerHTML = userData.points;
+    saveUserData();
+    
+    hrust.play();
+    slaw.classList.add('active');
+    first_boss.classList.add('active');
+    setTimeout(() => first_boss.classList.remove('active'), 100);
+    setTimeout(() => slaw.classList.remove('active'), 400);
+});
+
+// Модифицируем обработчик покупки
 buy1.addEventListener('click', function() {
-    if (points >= 10) {
-        damage = 2;
-        points -=  10;
+    if (userData.points >= 10) {
+        userData.damage = 2;
+        userData.points -= 10;
+        saveUserData();
         return;
-    };
-    alert('Не хватка бабла')
+    }
+    alert('Не хватка бабла');
 });
